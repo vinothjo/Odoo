@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="custom_isbooking_template_form_view" model="ir.ui.view">
+            <field name="name">booking.form.custom</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='client_order_ref']" position="after">
+                    <label for="is_booking"/>
+                    <field name="is_booking" nolabel="1" />
+                </xpath>
+                <xpath expr="/form/sheet/group/group/field[@name='payment_term_id']" position="after">
+                    <field name="team_id" attrs="{'invisible':[('is_booking','!=',True)]}" />
+                    <field name="leader_id" attrs="{'invisible':[('is_booking','!=',True)]}"/>
+                    <field name="booking_start" attrs="{'invisible':[('is_booking','!=',True)]}"/>
+                    <field name="booking_end" attrs="{'invisible':[('is_booking','!=',True)]}"/>
+                </xpath>
+            </field>
+        </record>
+    
+        <record id="custom_product_template_form_view" model="ir.ui.view">
+            <field name="name">product.template.form.custom</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/sheet/notebook/page/group/group/field[@name='type']" position="after">
+                    <field name="is_equipment"/>
+                </xpath>
+            </field>
+        </record>
+        
+
+    </data>
+
+</odoo>

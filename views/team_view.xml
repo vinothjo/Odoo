@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="team_form_view">
+            <field name="name">Team</field>
+            <field name="model">team.book</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                 <field name="name"/>
+                            </group>
+                            <group>
+                                 <field name="leader_id"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Team Members">
+                                 <field name="employee_ids" />
+                            </page> 
+                            <page string="Equipment">
+                                <field name="equipment_ids"  context="{'tree_view_ref' :'view_equipments_tree'}"/>
+                            </page> 
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="team_tree_view">
+            <field name="name">Team</field>
+            <field name="model">team.book</field>
+            <field name="arch" type="xml">
+                <tree>
+                     <field name="name" />
+                     <field name="leader_id"/> 
+                </tree>
+            </field>
+        </record>
+        
+        <record id="action_team_book" model="ir.actions.act_window">
+            <field name="name">Team</field>
+            <field name="res_model">team.book</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        
+        <menuitem action="action_team_book"
+            id="menu_sale_order_invoice" parent="menu_booking"
+            sequence="10"/>
+            
+    </data>
+</odoo>
